@@ -269,7 +269,8 @@ $(document).ready(function () {
 		$('#zip_cont').show();
 		if (jsonResults['count']) $('#count').val(jsonResults['count']);
 		$('#count_cont').show();
-		$('#count').prop('required',true);
+		$('#count').prop('required',false);
+		$('#count').val("")
 		
 		OnCountChange();
 		
