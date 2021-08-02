@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	$('#write-btn').hide();
+	$('<input type="text" name="mode" id="mode" value="read" hidden>').appendTo('#rsvp-form');
     /***************** Waypoints ******************/
 
     $('.wp1').waypoint(function () {
@@ -219,10 +220,10 @@ $(document).ready(function () {
 		switch (count) {
 			case 0:
 				$('#meal_cont').hide();
-				$('#meal_cont').val("");
+				$('#meal').val("");
 				$('#meal').prop('required',false);
 				$('#meal_plusone_cont').hide();
-				$('#meal_plusone_cont').val("");
+				$('#meal_plusone').val("");
 				$('#meal_plusone').prop('required',false);
 				break;
 			break;
@@ -230,7 +231,7 @@ $(document).ready(function () {
 				$('#meal_cont').show();
 				$('#meal').prop('required',true);
 				$('#meal_plusone_cont').hide();
-				$('#meal_plusone_cont').val("");
+				$('#meal_plusone').val("");
 				$('#meal_plusone').prop('required',false);
 				break;
 			break;
@@ -269,8 +270,7 @@ $(document).ready(function () {
 		$('#zip_cont').show();
 		if (jsonResults['count']) $('#count').val(jsonResults['count']);
 		$('#count_cont').show();
-		$('#count').prop('required',false);
-		$('#count').val("")
+		$('#count').prop('required',true);
 		
 		OnCountChange();
 		
@@ -300,6 +300,7 @@ $(document).ready(function () {
 		$('#zip_cont').hide();
 		$('#count_cont').hide();
 		$('#count').prop('required',false);
+		$('#count').val("");
 		OnCountChange();
 		
 		$('#count-opt-2').hide();
@@ -343,8 +344,8 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function(e){
 		e.preventDefault();
 		console.log('mode is ' + mode);
+		$('#mode').val(mode);
 		if (mode === "write") {
-			$('<input type="text" name="mode" id="mode" value="write" hidden>').appendTo('#rsvp-form');
 			submitRsvpForm(onWriteData);
 		}
 		else {
