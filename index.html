@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery.fancybox.css">
     <link rel="stylesheet" href="css/flexslider.css">
-    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/queries.css">
     <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
@@ -583,14 +583,10 @@
                 </div>
                 <div id="map-content" class="pointer-events-auto">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h5>Colvin House</h5>
-                            <p>5940 N Sheridan Rd, Chicago, IL 60660</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>events@creativecoworking.com</h5>
-                            <p><i class="fa fa-mobile"></i> <a href="tel://+17736542999">(773)654-2999</a></p>
-                        </div>
+						<h3>Colvin House</h3>
+						<p>5940 N Sheridan Rd, Chicago, IL 60660<br>
+						<i class="fa fa-mobile"></i> <a href="tel://+17736542999">(773) 654-2999</a><br>
+						events@creativecoworking.com</p>
                     </div>
                     <div class="row text-center">
                         <div class="col-md-6" style="padding: 5px;">
@@ -638,15 +634,14 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="form-input-group">
-                                <i class="fa fa-envelope"></i><input type="email" name="email" class=""
-                                                                     placeholder="Your email"
-                                                                     required>
+                                <i class="fa fa-user"></i><input name="first_name" id="first_name" class=""
+                                                                 placeholder="Your first name">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="form-input-group">
-                                <i class="fa fa-user"></i><input name="name" class=""
-                                                                 placeholder="Your name"
+                                <i class="fa fa-user"></i><input name="last_name" id="last_name" class=""
+                                                                 placeholder="Your last name"
                                                                  required>
                             </div>
                         </div>
@@ -654,28 +649,115 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="form-input-group">
-                                <i class="fa fa-users"></i><input type="number" name="extras" class="" min="0"
-                                                                  max="4"
-                                                                  placeholder="Husband/Wife or kids"
-                                                                  required>
+                                <i class="fa fa-ticket"></i><input type="text" name="wedding_code" id="wedding_code"
+                                                                class="" min="0"
+                                                                placeholder="Wedding Invite Code"
+                                                                required>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="form-input-group">
-                                <i class="fa fa-key"></i><input type="number" name="invite_code" id="invite_code"
+                                <i class="fa fa-key"></i><input type="text" name="personal_code" id="personal_code"
                                                                 class="" min="0"
-                                                                placeholder="Invite code"
+                                                                placeholder="Personal Code"
                                                                 required>
+                            </div>
+                        </div>
+					</div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6" id="phone_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-mobile"></i><input type="phone" name="phone" id="phone"
+                                                                class="" min="0"
+                                                                placeholder="Mobile Number"
+                                                                >
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="email_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-envelope"></i><input type="email" name="email" id="email" class=""
+                                                                     placeholder="Your email"
+                                                                     >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6"  id="address_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-address-card"></i><input type="address" name="address" id="address"
+                                                                class="" min="0"
+                                                                placeholder="Street Address"
+                                                                >
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="city_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-address-card"></i><input type="city" name="city" id="city"
+                                                                class="" min="0"
+                                                                placeholder="City"
+                                                                >
+                            </div>
+                        </div>
+					</div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6" id="state_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-address-card"></i><input type="state" name="state" id="state"
+                                                                class="" min="0"
+                                                                placeholder="State"
+                                                                >
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="zip_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-address-card"></i><input type="text" name="zip" id="zip"
+                                                                class="" min="0"
+                                                                placeholder="Zipcode"
+                                                                >
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="count_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-users"></i><select name="count" id="count">
+                                                                <option value="" disabled selected>Select your Attendance</option>
+                                                                <option value=0>Sorry, I can not attend.</option>
+                                                                <option value=1>Yes! I'd love to attend!</option>
+                                                                <option id="count-opt-2" value=2 hidden>Yes! I'll be bringing a guest!</option>
+                                                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="meal_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-cutlery"></i><select name="meal" id="meal">
+                                                                <option value="" disabled selected>Select your meal</option>
+                                                                <option value="Pork">Pork (Lechon Boricua)</option>
+                                                                <option value="Steak">Chimichurri Steak</option>
+                                                                <option value="Salmon">Salmon</option>
+                                                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="meal_plusone_cont" hidden>
+                            <div class="form-input-group">
+                                <i class="fa fa-cutlery"></i><select name="meal_plusone" id="meal_plusone">
+                                                                <option value="" disabled selected>Select your date's meal</option>
+                                                                <option value="Pork">Pork (Lechon Boricua)</option>
+                                                                <option value="Steak">Chimichurri Steak</option>
+                                                                <option value="Salmon">Salmon</option>
+                                                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12" id="alert-wrapper"></div>
                     </div>
-                    <button class="btn-fill rsvp-btn">
-                        Yes,
-                        that's me!
-                    </button>
+					<div class="row">
+						<button class="btn-fill rsvp-btn" type="submit" id="write-btn" name="mode" value="write">
+							Submit my RSVP!
+						</button>
+						<button class="btn-fill rsvp-btn" type="submit" id="read-btn" name="mode" value="read">
+							Get my information!
+						</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -701,7 +783,7 @@
 <script src="js/jquery.mb.YTPlayer.min.js"></script>
 <script src="node_modules/waypoints/lib/jquery.waypoints.min.js"></script>
 <script src="js/vendor/ouical.js"></script>
-<script src="js/scripts.min.js"></script>
+<script src="js/scripts.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHSM9Nq37Pen8GkxoxNgvNuu1wBBODOx8&callback=initMap"></script>
 <!-- Google Analytics -->

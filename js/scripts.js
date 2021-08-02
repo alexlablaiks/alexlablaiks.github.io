@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+	$('#write-btn').hide();
     /***************** Waypoints ******************/
 
     $('.wp1').waypoint(function () {
@@ -184,48 +184,151 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Reagan and Alex's Wedding",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('Oct 23, 2021 16:30'),
 
             // Event duration (IN MINUTES)
             // duration: 120,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            end: new Date('Oct 24, 2021 00:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
+            address: '5940 N Sheridan Rd, Chicago, IL 60660',
 
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            // description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            description: "We can't wait to see you on our big day."
         }
     });
 
     $('#add-to-cal').html(myCalendar);
+	
+	var maxCount = 2;
+	
+	var mode;
+	$('.btn-fill.rsvp-btn').click(function() {
+		mode = $(this).attr('value')
+    })
+	
+	var OnCountChange = function(){
+		let count = Number($('#count').val());
+		switch (count) {
+			case 0:
+				$('#meal_cont').hide();
+				$('#meal_cont').val("");
+				$('#meal').prop('required',false);
+				$('#meal_plusone_cont').hide();
+				$('#meal_plusone_cont').val("");
+				$('#meal_plusone').prop('required',false);
+				break;
+			break;
+			case 1:
+				$('#meal_cont').show();
+				$('#meal').prop('required',true);
+				$('#meal_plusone_cont').hide();
+				$('#meal_plusone_cont').val("");
+				$('#meal_plusone').prop('required',false);
+				break;
+			break;
+			case 2:
+				$('#meal_cont').show();
+				$('#meal').prop('required',true);
+				$('#meal_plusone_cont').show();
+				$('#meal_plusone').prop('required',true);
+				break;
+			break;
+		}
+	}
+ 	$('#count').change(OnCountChange);
+	
+	var onReadData = function (jsonResults) {
+		maxCount = Number(jsonResults['max_count'] ?? 1);
+		
+		$('#read-btn').css('border','solid 2px #F3EED6');
+		$('#read-btn').css('background-color','#F3EED6');
+		$('#write-btn').show();
+		
+		$('#first_name').val(jsonResults['first_name']);
 
+		// Basic fields that are editable
+		$('#phone').val(jsonResults['phone']);
+		$('#phone_cont').show();
+		$('#email').val(jsonResults['email']);
+		$('#email_cont').show();
+		$('#address').val(jsonResults['address']);
+		$('#address_cont').show();
+		$('#city').val(jsonResults['city']);
+		$('#city_cont').show();
+		$('#state').val(jsonResults['state']);
+		$('#state_cont').show();
+		$('#zip').val(jsonResults['zip']);
+		$('#zip_cont').show();
+		if (jsonResults['count']) $('#count').val(jsonResults['count']);
+		$('#count_cont').show();
+		$('#count').prop('required',true);
+		
+		OnCountChange();
+		
+		// Food selection based on count / RSVP
+		$('#meal').val(jsonResults['meal']);
+		$('#meal_plusone').val(jsonResults['meal_plusone']);
+		
+		// special handle for plus one-ness
+		if (maxCount >= 2) {
+			$('#count-opt-2').show();
+		}
+		
+		$('#alert-wrapper').html(alert_markup('info', 'Alright! Please indicate your attendance and update your info.'));
+	};
+	
+	var resetForm = function(){
+		$('#read-btn').css('border','solid 2px #e8ca6f');
+		$('#read-btn').css('background-color','#e8ca6f');
+		$('#write-btn').hide();
 
-    /********************** RSVP **********************/
-    $('#rsvp-form').on('submit', function (e) {
-        e.preventDefault();
-        var data = $(this).serialize();
+		// Basic fields that are editable
+		$('#phone_cont').hide();
+		$('#email_cont').hide();
+		$('#address_cont').hide();
+		$('#city_cont').hide();
+		$('#state_cont').hide();
+		$('#zip_cont').hide();
+		$('#count_cont').hide();
+		$('#count').prop('required',false);
+		OnCountChange();
+		
+		$('#count-opt-2').hide();
+		
+		$('#rsvp-form').trigger("reset");
+	};
+	
+	var onWriteData = function (jsonResults) {
+		resetForm();
+		$('#alert-wrapper').html('');
+		$('#rsvp-modal').modal('show');
+	};
+	
+	var submitRsvpForm = function (successCallback) {
+        var data = $('#rsvp-form').serialize();
+		console.log(data);
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Communicating with the server'));
 
-        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
-            && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
+        if (MD5($('#wedding_code').val()) !== '3fc9cee0ab3a704dadcf4d428b71a7d7') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbzUqz44wOat0DiGjRV1gUnRf4HRqlRARWggjvHKWvqniP7eVDG-/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbzcKdfQGowlQmQhQquWIWAYVQeyaCD2JoBVUxZ7gJU3xGDlRGFDtDLdFhilYbHs2mMNIw/exec', data)
                 .done(function (data) {
                     console.log(data);
                     if (data.result === "error") {
                         $('#alert-wrapper').html(alert_markup('danger', data.message));
                     } else {
-                        $('#alert-wrapper').html('');
-                        $('#rsvp-modal').modal('show');
+						let jsonResults = data['data'];
+						successCallback(jsonResults);
                     }
                 })
                 .fail(function (data) {
@@ -233,8 +336,20 @@ $(document).ready(function () {
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
                 });
         }
-    });
-
+    }
+	
+    /********************** RSVP **********************/
+    $('#rsvp-form').on('submit', function(e){
+		e.preventDefault();
+		console.log('mode is ' + mode);
+		if (mode === "write") {
+			$('<input type="text" name="mode" id="mode" value="write" hidden>').appendTo('#rsvp-form');
+			submitRsvpForm(onWriteData);
+		}
+		else {
+			submitRsvpForm(onReadData);
+		}
+	});
 });
 
 /********************** Extras **********************/
