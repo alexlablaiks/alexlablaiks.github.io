@@ -848,6 +848,9 @@ header .member-actions {
     left: 30px;
     transform: translateY(-50%);
 }
+i.fa-star {
+    color: #e8ca6f;
+}
 .rsvp .rsvp-form .form-input-group i.fa-user,
 .rsvp .rsvp-form .form-input-group i.fa-users,
 .rsvp .rsvp-form .form-input-group i.fa-envelope,
@@ -920,4 +923,29 @@ body.modal-open {
 }
 .modal-body {
     padding: 25px;
+}
+.food-p {
+	margin: 8px;
+}
+.food-img {
+	object-fit: cover;
+	width: auto;
+	height: 383px;
+}
+#steak-img {
+	object-position: left;
+}
+.food-column {
+	float: left;
+	height: auto;
+	width: 33%;
+	padding: 0px;
+	transition: all .2s ease;
+	vertical-align: middle;
+}
+/* Clear floats after image containers */
+.food-row::after {
+  content: "";
+  clear: both;
+  display: table;
 }

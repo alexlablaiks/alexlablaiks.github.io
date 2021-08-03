@@ -18,7 +18,7 @@
 }
 
 /* Responsive nav kicks in */
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1050px) {
     header {
         width: 90%;
         padding-left: 25px;
@@ -363,4 +363,10 @@
     .rsvp {
         padding-top: 20px;
     }
+}
+
+@media all and (max-width: 600px) {
+	.food-column {
+		width: 100%;
+	}
 }
