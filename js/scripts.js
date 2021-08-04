@@ -215,10 +215,23 @@ $(document).ready(function () {
 		mode = $(this).attr('value')
     })
 	
+	var OnAllergiesChange = function() {
+		if ($('#allergies').val() === 'No') {
+			$('#notes').prop('required',false);
+		} else {
+			$('#notes').prop('required',true);
+		}
+	}
+ 	$('#allergies').change(OnAllergiesChange);
+	
 	var OnCountChange = function(){
 		let count = Number($('#count').val());
 		switch (count) {
 			case 0:
+				$('#allergies_cont').hide();
+				$('#allergies').val("");
+				$('#allergies').prop('required',false);
+				$('#notes').prop('required',false);
 				$('#meal_cont').hide();
 				$('#meal').val("");
 				$('#meal').prop('required',false);
@@ -228,6 +241,8 @@ $(document).ready(function () {
 				break;
 			break;
 			case 1:
+				$('#allergies_cont').show();
+				$('#allergies').prop('required',true);
 				$('#meal_cont').show();
 				$('#meal').prop('required',true);
 				$('#meal_plusone_cont').hide();
@@ -236,6 +251,8 @@ $(document).ready(function () {
 				break;
 			break;
 			case 2:
+				$('#allergies_cont').show();
+				$('#allergies').prop('required',true);
 				$('#meal_cont').show();
 				$('#meal').prop('required',true);
 				$('#meal_plusone_cont').show();
@@ -268,10 +285,20 @@ $(document).ready(function () {
 		$('#state_cont').show();
 		$('#zip').val(jsonResults['zip']);
 		$('#zip_cont').show();
-		if (jsonResults['count']) $('#count').val(jsonResults['count']);
+		$('#parking').val(jsonResults['parking']);
+		$('#parking_cont').show();
+		$('#notes').val(jsonResults['notes']);
+		$('#notes_cont').show();
+		
+		$('#allergies').val(jsonResults['allergies']);
+		$('#allergies_cont').show();
+		$('#allergies').prop('required',true);
+		OnAllergiesChange();
+		
+		let count = Number(jsonResults['count']);
+		if ((0 <= count) && (count <= maxCount)) $('#count').val(count);
 		$('#count_cont').show();
 		$('#count').prop('required',true);
-		
 		OnCountChange();
 		
 		// Food selection based on count / RSVP
@@ -298,6 +325,14 @@ $(document).ready(function () {
 		$('#city_cont').hide();
 		$('#state_cont').hide();
 		$('#zip_cont').hide();
+		$('#parking_cont').hide();
+		$('#notes_cont').hide();
+		
+		$('#allergies_cont').hide();
+		$('#allergies').prop('required',false);
+		$('#allergies').val("");
+		OnAllergiesChange();
+		
 		$('#count_cont').hide();
 		$('#count').prop('required',false);
 		$('#count').val("");
@@ -323,7 +358,7 @@ $(document).ready(function () {
         if (MD5($('#wedding_code').val()) !== '3fc9cee0ab3a704dadcf4d428b71a7d7') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbzcKdfQGowlQmQhQquWIWAYVQeyaCD2JoBVUxZ7gJU3xGDlRGFDtDLdFhilYbHs2mMNIw/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbwqP_ca92X9Xw-FPon8vsEIsorfZdk9eP-vlT2D0G3vMaLSSRvND0gQpdvmbHOtQTJpRA/exec', data)
                 .done(function (data) {
                     console.log(data);
                     if (data.result === "error") {

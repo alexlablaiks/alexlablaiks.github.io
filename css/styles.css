@@ -858,6 +858,9 @@ i.fa-star {
 .rsvp .rsvp-form .form-input-group i.fa-mobile,
 .rsvp .rsvp-form .form-input-group i.fa-ticket,
 .rsvp .rsvp-form .form-input-group i.fa-cutlery,
+.rsvp .rsvp-form .form-input-group i.fa-heartbeat,
+.rsvp .rsvp-form .form-input-group i.fa-car,
+.rsvp .rsvp-form .form-input-group i.fa-pencil,
 .rsvp .rsvp-form .form-input-group .fa-key {
     font-size: 14px;
     position: absolute;
@@ -866,8 +869,9 @@ i.fa-star {
     margin-left: 20px;
 }
 .rsvp .rsvp-form .form-input-group input,
+.rsvp .rsvp-form .form-input-group textarea,
 .rsvp .rsvp-form .form-input-group select {
-    padding-left: 68px;
+    padding-left: 58px;
     width: 100%;
     height: 100%;
     -moz-border-radius: 6px;
