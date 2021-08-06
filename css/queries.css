@@ -1,6 +1,6 @@
 @media screen and (max-width: 1200px) {
     header {
-        width: 90%;
+        width: 97%;
         margin: 0 auto;
     }
 
@@ -18,7 +18,7 @@
 }
 
 /* Responsive nav kicks in */
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1135px) {
     header {
         width: 90%;
         padding-left: 25px;
