@@ -295,7 +295,7 @@ $(document).ready(function () {
 		$('#allergies').prop('required',true);
 		OnAllergiesChange();
 		
-		let count = Number(jsonResults['count']);
+		let count = (jsonResults['count']) ? Number(jsonResults['count']) : -1;
 		if ((0 <= count) && (count <= maxCount)) $('#count').val(count);
 		$('#count_cont').show();
 		$('#count').prop('required',true);
