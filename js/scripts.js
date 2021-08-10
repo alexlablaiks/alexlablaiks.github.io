@@ -358,7 +358,7 @@ $(document).ready(function () {
         if (MD5($('#wedding_code').val()) !== '3fc9cee0ab3a704dadcf4d428b71a7d7') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbzSPPpfHeI7KkFv8niPbK8uYiRxhkOciE-BlOAvhtH9NliovkZLFk3cqVd9L4KExlw-/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbwJ977794ODnv4f4hgexwjKq2lA01vGW5otPAzER4c8kXf9UzGMJWnysS1JeHT5xN-I/exec', data)
                 .done(function (data) {
                     console.log(data);
                     if (data.result === "error") {
