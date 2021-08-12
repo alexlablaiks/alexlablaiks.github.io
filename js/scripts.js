@@ -152,7 +152,7 @@ $(document).ready(function () {
             'style="width:105px; height:21px;">' +
             '</iframe>' + 
             
-            '<div class="fb-like" data-href="https://reaganandalexwedding.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>' +
+            '<div class="fb-like" data-href="https://reaganandalexwedding.com/" data-width="20" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>' +
             
             '<div class="g-plusone" data-size="medium"></div>';
 
